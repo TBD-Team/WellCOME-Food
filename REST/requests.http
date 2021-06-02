@@ -1,0 +1,9 @@
+POST http://localhost:8000/api/credits/ HTTP/1.1
+content-type: application/json
+Authorization: Token 2b83df66f7d9d1a188aeb416756cd5e14f4e5712
+
+{
+    "value":"50",
+    "expiration_time":"02/06/2021"
+}
+###
