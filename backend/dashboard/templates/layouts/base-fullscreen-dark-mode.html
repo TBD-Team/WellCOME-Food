@@ -1,0 +1,29 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en"{% if page.rtl or site.rtl %} dir="rtl" {% endif %}>
+<head>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+	<meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+
+	
+    {% block title %}<title>Página em branco</title>{% endblock title %}
+
+	<link href="{% static 'tabler/css/tabler.min.css' %}" rel="stylesheet"/>
+    <link href="{% static 'tabler/css/tabler-flags.min.css' %}" rel="stylesheet"/>
+    <link href="{% static 'tabler/css/tabler-payments.min.css' %}" rel="stylesheet"/>
+    <link href="{% static 'tabler/css/tabler-vendors.min.css' %}" rel="stylesheet"/>
+    <link href="{% static 'tabler/css/demo.min.css' %}" rel="stylesheet"/>
+    <link href="{% static 'fontawesome/css/fontawesome-all.min.css' %}" rel="stylesheet" type="text/css">
+    
+    {% block stylesheets %}{% endblock stylesheets %}
+</head>
+
+<body class="antialiased border-top-wide border-primary d-flex flex-column theme-dark">
+        
+        {% block content %}{% endblock content %}
+
+	<script src="{% static 'tabler/js/tabler.min.js' %}"></script>
+</body>
+</html>

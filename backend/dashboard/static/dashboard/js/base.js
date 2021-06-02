@@ -1,0 +1,3 @@
+new SlimSelect({
+    select: '.multiselect'
+})

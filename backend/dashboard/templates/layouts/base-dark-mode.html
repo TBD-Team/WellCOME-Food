@@ -1,0 +1,38 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en" {% if page.rtl or site.rtl %} dir="rtl" {% endif %}>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    {% block head %}{% endblock %}
+
+    {% block title %}<title>Página em branco</title>{% endblock %}
+
+    {% include 'includes/stylesheets.html' %}
+    {% block stylesheet %}{% endblock stylesheet %}
+    {% include 'includes/topscripts.html' %}
+
+    <!-- bootstrap selectpicker -->
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap-select.min.css' %}">
+</head>
+
+<body class="antialiased theme-dark">
+    <div class="wrapper">
+        {% include 'includes/sidebar.html' %}
+        {% include 'includes/topbar.html' %}
+
+        <div class="page-wrapper">
+            <div class="container-xl">
+                {% block content %}{% endblock content %}
+            </div>
+        </div>
+    </div>
+
+    {% include 'includes/scripts.html' %}
+    {% block scripts %}{% endblock scripts %}
+</body>
+
+</html>

@@ -1,0 +1,121 @@
+{% extends 'app/layouts/base-dark-mode.html' %}
+{% load static %}
+{% load component_tags %}
+{% load widget_tweaks %}
+
+{% block title %}<title>Dashboard - Produto</title>{% endblock title %}
+
+{% block content %}
+
+<!-- Page title -->
+<div class="row-md-12">
+  <button class="btn btn-light btn-pill" data-toggle="collapse" href="#collapseExample" aria-expanded="true"
+    aria-controls="collapseExample">
+    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24"
+      viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+      stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+      <circle cx="10" cy="10" r="7"></circle>
+      <line x1="21" y1="21" x2="15" y2="15"></line>
+    </svg>
+    Filtrar produtos
+  </button>
+  <div class="card-body show" id="collapseExample">
+    <form action="{% url 'dashboard' %}" method="post">
+      {% csrf_token %}
+      <div class="row">
+        <div class="col-sm">
+          <div class="form-group mb-3">
+            <div class="row-fluid md-12">
+              <div class="form-label">Selecione seu produto</div>
+              {% render_field form.product class+="selectpicker" data-width="100%" data-live-search="true" %}
+            </div>
+          </div>
+        </div>
+        <div class="col-sm">
+          <div class="form-group mb-3">
+            <label class="form-label">Data inicial</label>
+            <div class="input-icon mb-2">
+              {% render_field form.start_date class+="form-control" placeholder="Select a date" %}
+            </div>
+          </div>
+        </div>
+        <div class="col-sm">
+          <div class="form-group mb-3">
+            <label class="form-label">Data Final</label>
+            <div class="input-icon mb-2">
+              {% render_field form.end_date class+="form-control" placeholder="Select a date" %}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group mb-3 ">
+        <label class="form-label">Seleciones as empresas</label>
+        {% render_field form.companies class+="multiselect" %}
+      </div>
+      <div class="form-footer">
+        <button type="submit" class="btn btn-primary btn-pill w-40  float-right">Pesquisar</button>
+      </div>
+    </form>
+  </div>
+</div>
+{% include 'app/includes/messages.html' %}
+<div class="page-header d-print-none mt-4">
+  <div class="row align-items-center">
+    <div class="col">
+      <!-- Page pre-title -->
+      <div class="page-pretitle">
+        Overview
+      </div>
+      <h2 class="page-title">
+        {{ product.name }}
+      </h2>
+    </div>
+    <!-- Page title actions -->
+    <div class="col-auto ms-auto d-print-none">
+      <div class="btn-list">
+        <a href="#" class="btn btn-primary d-sm-none btn-icon" data-bs-toggle="modal" data-bs-target="#modal-report"
+          aria-label="Create new report">
+          <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
+            stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <line x1="12" y1="5" x2="12" y2="19" />
+            <line x1="5" y1="12" x2="19" y2="12" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<div class="page-body">
+  <div class="container-xl">
+    {% if view %}
+    <div class="row">
+      {% for card in view.cards %}
+      {% component "card" card=card %}
+      {% endfor %}
+    </div>
+
+    <div class="row">
+      {% component "folium-map" title="Map comparação preços" map=view.map_prices %}
+    </div>
+    <div class="row">
+      {% component "plotly-card" plotly_graph=view.graphs.bar_comp %}
+      {% component "plotly-card" plotly_graph=view.graphs.box_price_dist %}
+      {% component "plotly-card" plotly_graph=view.graphs.line_price_var %}
+    </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock content %}
+{% block scripts %}
+{% component_js_dependencies %}
+<script>
+  var fetch_companies_url = "{% url 'fetch-companies' %}";
+</script>
+<script src="{% static 'app/js/dashboard.js' %}"></script>
+{% endblock scripts %}

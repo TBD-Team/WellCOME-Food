@@ -1,0 +1,35 @@
+{% extends 'layouts/base-dark-mode.html' %}
+
+
+{% block content %}
+<div class="page-wrapper">
+  <div class="container-xl">
+    <!-- Page title -->
+    <div class="page-header d-print-none">
+      <div class="row align-items-center">
+        <div class="col">
+          <!-- Page pre-title -->
+          <div class="page-pretitle">
+            Dashboard
+          </div>
+          <h2 class="page-title">
+            Validar GRU
+          </h2>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="page-body">
+    <div class="container-xl">
+      <div class="row">
+        {% for credit in page_obj %}
+        <a href="#" class="col-md-4">
+          {{ credit.account.user.username }}
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

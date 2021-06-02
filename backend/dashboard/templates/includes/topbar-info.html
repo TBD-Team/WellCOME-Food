@@ -1,0 +1,18 @@
+{% load static %}
+
+<div class="nav-item dropdown">
+  <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Open user menu">
+    <span class="avatar avatar-sm" style="background-image: url(/static/dashboard/images/avatar.svg)"></span>
+    <div class="d-none d-xl-block ps-2">
+      <div>{% if user.first_name %}{{ user.first_name }}{% else %}{{ user.username }}{% endif %}</div>
+    </div>
+  </a>
+  <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+    <a href="#" class="dropdown-item">Mudar Senha</a>
+    <a href="#" class="dropdown-item">Perfil & Empresa</a>
+    <div class="dropdown-divider"></div>
+    <a href="#" class="dropdown-item">Configurações</a>
+    <a href="{% url 'logout' %}" class="dropdown-item">Sair</a>
+  </div>
+</div>
+</div>

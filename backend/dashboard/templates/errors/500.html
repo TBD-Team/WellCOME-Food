@@ -1,0 +1,28 @@
+{% extends 'app/layouts/base-dark-mode.html' %}
+{% load static %}
+{% block stylesheet %}
+<style>
+  .page-wrap {
+    min-height: 100vh;
+  }
+</style>
+{% endblock stylesheet %}
+{% block content %}
+<div class="page-wrapper">
+  <div class="container-xl">
+    <div class="row-md-12">
+      <div class="page-wrap d-flex flex-row align-items-center">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-md-12 text-center">
+              <span class="display-1 d-block">500</span>
+              <div class="mb-4 lead">Erro interno no servidor.</div>
+              <a href="/" class="btn btn-light">Voltar para o início</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
